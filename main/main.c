@@ -42,14 +42,33 @@ static void rc522_handler(void* arg, esp_event_base_t base, int32_t event_id, vo
     switch(event_id) {
         case RC522_EVENT_TAG_SCANNED: {
                 rc522_tag_t* tag = (rc522_tag_t*) data->ptr;
-                sprintf(buffer,"Verificar tarjeta [sn: %" PRIu64 "]", tag->serial_number);
-                ESP_LOGI(TAG,"%s\n",buffer );
-                mqtt_publish(buffer,"request",2,0);
+                sprintf(buffer, "Verificar tarjeta [sn: %" PRIu64 "]", tag->serial_number);
+                ESP_LOGI(TAG, "%s\n", buffer);
+
+                // Publicar el valor de la tarjeta al tópico grupob_request
+                mqtt_publish(buffer, "grupob_request", 2, 0);
             }
             break;
     }
 }
 
+// Función para extraer el valor de "resultado" del mensaje JSON recibido
+int extract_resultado_from_json(const char* json_message) {
+    const char* key = "\"resultado\":";
+    const char* start = strstr(json_message, key);
+    
+    if (start != NULL) {
+        start += strlen(key); // Mover el puntero al inicio del valor de resultado
+        char* end;
+        int resultado = strtol(start, &end, 10); // Convertir la parte numérica a entero
+        
+        if (start != end) { // Verificar que se haya encontrado un número válido
+            return resultado;
+        }
+    }
+    
+    return -1; // Valor por defecto si no se encuentra o no es válido
+}
 
 static void RFID_reader_init(){
  rc522_create(&config, &scanner);
@@ -57,21 +76,36 @@ static void RFID_reader_init(){
  rc522_start(scanner);
 }
 
-static void get_data(char* data, char* topic) {
+// Función para procesar el mensaje recibido desde MQTT
+void get_data(const char* data, const char* topic) {
     printf("\n[%s] %s\n", topic, data);
-    // Extraer el número de serie de la cadena recibida
-    char* start = strstr(data, "[sn: ");
-    if (start != NULL) {
-        start += 5; // Mover el puntero al inicio del número de serie
-        char* end = strchr(start, ']'); // Buscar el final del número de serie
-        if (end != NULL) {
-            *end = '\0'; // Terminar la cadena en el punto final del número de serie
-            // Compara el número de serie extraído con el número de tarjeta deseado
-            if (strcmp(start, tarjeta_valida) == 0) {
-                gpio_set_level(LED_GPIO, 1); // Enciende el LED si los números son iguales
+    
+    // Comprobar si el mensaje proviene del tópico "grupob_request1"
+    if (strcmp(topic, "grupob_request1") == 0) {
+        // Mostrar el mensaje recibido por consola
+        printf("Mensaje recibido en 'grupob_request1': %s\n", data);
+        
+        // Extraer el valor de "resultado" del mensaje JSON
+        int resultado = extract_resultado_from_json(data);
+        
+        // Verificar si se pudo extraer correctamente el resultado
+        if (resultado != -1) {
+            printf("Valor del resultado: %d\n", resultado);
+            
+            // Encender o apagar el LED según el valor de resultado
+            if (resultado == 1) {
+                printf("Encendiendo el LED.\n");
+                // Encender el LED
+                gpio_set_level(LED_GPIO, 1); // Activar para encender el LED
+            } else if (resultado == 0) {
+                printf("Apagando el LED.\n");
+                // Apagar el LED
+                gpio_set_level(LED_GPIO, 0); // Activar para apagar el LED
             } else {
-                gpio_set_level(LED_GPIO, 0); // Apaga el LED si los números son diferentes
+                printf("Valor de resultado no reconocido.\n");
             }
+        } else {
+            printf("No se pudo extraer el valor de resultado del mensaje JSON.\n");
         }
     }
 }
@@ -80,14 +114,13 @@ static void get_data(char* data, char* topic) {
 
 
 static void mqtt_connected(){
-    printf("init mqtt\n");
-    mqtt_subcribe("request",2);
-
+    printf("MQTT conectado, suscribiéndose al tópico 'grupob_request1'.\n");
+    mqtt_subcribe("grupob_request1", 2); // Suscripción al tópico grupob_request1 con QoS 2
 }
 
 static void callback_wifi_connected(){
-    printf("WIFI Ok\n");
-    mqtt_init(MQTT_URL,mqtt_connected,NULL,get_data);
+    printf("WiFi conectada. Iniciando MQTT...\n");
+    mqtt_init(MQTT_URL, mqtt_connected, NULL, get_data);
 }
 
 
