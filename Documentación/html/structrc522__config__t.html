@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proyecto lector RFID: rc522_config_t Struct Reference</title>
+<title>DetectorRFID: rc522_config_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Proyecto lector RFID<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">DetectorRFID<span id="projectnumber">&#160;0.0.1</span>
    </div>
-   <div id="projectbrief">Lector de tarjetas RFID con conexión a servidor MQTT.</div>
+   <div id="projectbrief">Proyecto de detector RFID utilizando ESP32 y lector RFID RC522.</div>
   </td>
  </tr>
  </tbody>
@@ -91,6 +91,9 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>Configuración del controlador RC522.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rc522_8h_source.html">rc522.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -120,14 +123,16 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a740e1a5071d7b755df595e51761cd01f" id="r_a740e1a5071d7b755df595e51761cd01f"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;uint32_t&#160;&#160;&#160;<a class="el" href="#a740e1a5071d7b755df595e51761cd01f">device_flags</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a740e1a5071d7b755df595e51761cd01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeeb5eff07ed4a3e91ce2b5666cad034e" id="r_aeeb5eff07ed4a3e91ce2b5666cad034e"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;bool&#160;&#160;&#160;<a class="el" href="#aeeb5eff07ed4a3e91ce2b5666cad034e">bus_is_initialized</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:aeeb5eff07ed4a3e91ce2b5666cad034e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to true if the bus is already initialized. NOTE: This property will be removed in future, once when <a href="https://github.com/espressif/esp-idf/issues/8745">https://github.com/espressif/esp-idf/issues/8745</a> is resolved.  <a href="#aeeb5eff07ed4a3e91ce2b5666cad034e">More...</a><br /></td></tr>
+<tr class="memdesc:aeeb5eff07ed4a3e91ce2b5666cad034e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indica si el bus SPI está inicializado.  <a href="#aeeb5eff07ed4a3e91ce2b5666cad034e">More...</a><br /></td></tr>
 <tr class="separator:aeeb5eff07ed4a3e91ce2b5666cad034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada77ce8a848263a633636e0c64a467d6" id="r_ada77ce8a848263a633636e0c64a467d6"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="#ada77ce8a848263a633636e0c64a467d6">spi</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ada77ce8a848263a633636e0c64a467d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cfe557cf3939331ed646457fa7b1fda" id="r_a8cfe557cf3939331ed646457fa7b1fda"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom">&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a8cfe557cf3939331ed646457fa7b1fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Field Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Configuración del controlador RC522. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
 <a id="a8cfe557cf3939331ed646457fa7b1fda" name="a8cfe557cf3939331ed646457fa7b1fda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8cfe557cf3939331ed646457fa7b1fda">&#9670;&#160;</a></span>[union]</h2>
 
@@ -154,7 +159,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set to true if the bus is already initialized. NOTE: This property will be removed in future, once when <a href="https://github.com/espressif/esp-idf/issues/8745">https://github.com/espressif/esp-idf/issues/8745</a> is resolved. </p>
+<p>Indica si el bus SPI está inicializado. </p>
+<dl class="section note"><dt>Note</dt><dd>Esta propiedad será eliminada en el futuro. </dd></dl>
 
 </div>
 </div>
@@ -169,6 +175,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Velocidad de reloj en Hz </p>
 
 </div>
 </div>
@@ -183,6 +190,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Flags del dispositivo SPI </p>
 
 </div>
 </div>
@@ -197,6 +205,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Host SPI </p>
 
 </div>
 </div>
@@ -211,6 +220,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>GPIO MISO </p>
 
 </div>
 </div>
@@ -225,6 +235,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>GPIO MOSI </p>
 
 </div>
 </div>
@@ -239,6 +250,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Intervalo de escaneo en milisegundos </p>
 
 </div>
 </div>
@@ -253,6 +265,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>GPIO SCK </p>
 
 </div>
 </div>
@@ -267,6 +280,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>GPIO SDA </p>
 
 </div>
 </div>
@@ -295,6 +309,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Prioridad de la tarea </p>
 
 </div>
 </div>
@@ -309,6 +324,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Tamaño de la pila de la tarea </p>
 
 </div>
 </div>

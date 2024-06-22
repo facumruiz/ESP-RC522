@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proyecto lector RFID: main/include/rc522.h File Reference</title>
+<title>DetectorRFID: main/include/rc522.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Proyecto lector RFID<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">DetectorRFID<span id="projectnumber">&#160;0.0.1</span>
    </div>
-   <div id="projectbrief">Lector de tarjetas RFID con conexión a servidor MQTT.</div>
+   <div id="projectbrief">Proyecto de detector RFID utilizando ESP32 y lector RFID RC522.</div>
   </td>
  </tr>
  </tbody>
@@ -98,6 +98,9 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">rc522.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Encabezado para el controlador RC522 RFID.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;esp_event.h&gt;</code><br />
 <code>#include &lt;driver/spi_master.h&gt;</code><br />
 <code>#include &lt;driver/i2c.h&gt;</code><br />
@@ -107,33 +110,43 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrc522__config__t.html">rc522_config_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuración del controlador RC522.  <a href="structrc522__config__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrc522__event__data__t.html">rc522_event_data_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datos del evento RC522.  <a href="structrc522__event__data__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrc522__tag__t.html">rc522_tag_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datos de la etiqueta RFID del RC522.  <a href="structrc522__tag__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ac4dbe3b4bff8eea3ffb8470d68af4a04" id="r_ac4dbe3b4bff8eea3ffb8470d68af4a04"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4dbe3b4bff8eea3ffb8470d68af4a04">RC522_DEFAULT_SCAN_INTERVAL_MS</a>&#160;&#160;&#160;(125)</td></tr>
+<tr class="memdesc:ac4dbe3b4bff8eea3ffb8470d68af4a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intervalo de escaneo predeterminado del RC522 en milisegundos.  <br /></td></tr>
 <tr class="separator:ac4dbe3b4bff8eea3ffb8470d68af4a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b5d05f7e1ded2b8b2d95e9cdcca7e42" id="r_a5b5d05f7e1ded2b8b2d95e9cdcca7e42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b5d05f7e1ded2b8b2d95e9cdcca7e42">RC522_DEFAULT_TASK_STACK_SIZE</a>&#160;&#160;&#160;(4 * 1024)</td></tr>
+<tr class="memdesc:a5b5d05f7e1ded2b8b2d95e9cdcca7e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tamaño predeterminado de la pila de la tarea del RC522.  <br /></td></tr>
 <tr class="separator:a5b5d05f7e1ded2b8b2d95e9cdcca7e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ca94dcb36acb08906aaf37c46fbdb5b" id="r_a0ca94dcb36acb08906aaf37c46fbdb5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ca94dcb36acb08906aaf37c46fbdb5b">RC522_DEFAULT_TASK_STACK_PRIORITY</a>&#160;&#160;&#160;(4)</td></tr>
+<tr class="memdesc:a0ca94dcb36acb08906aaf37c46fbdb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prioridad predeterminada de la pila de la tarea del RC522.  <br /></td></tr>
 <tr class="separator:a0ca94dcb36acb08906aaf37c46fbdb5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bdb86806b2f4d00afbaf9d6e6bb4fc0" id="r_a5bdb86806b2f4d00afbaf9d6e6bb4fc0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bdb86806b2f4d00afbaf9d6e6bb4fc0">RC522_DEFAULT_SPI_CLOCK_SPEED_HZ</a>&#160;&#160;&#160;(5000000)</td></tr>
+<tr class="memdesc:a5bdb86806b2f4d00afbaf9d6e6bb4fc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocidad de reloj SPI predeterminada del RC522 en Hz.  <br /></td></tr>
 <tr class="separator:a5bdb86806b2f4d00afbaf9d6e6bb4fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc41885e47770d7e9f3adf036855025f" id="r_adc41885e47770d7e9f3adf036855025f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc41885e47770d7e9f3adf036855025f">RC522_DEFAULT_I2C_RW_TIMEOUT_MS</a>&#160;&#160;&#160;(1000)</td></tr>
+<tr class="memdesc:adc41885e47770d7e9f3adf036855025f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tiempo de espera predeterminado de lectura/escritura I2C del RC522 en milisegundos.  <br /></td></tr>
 <tr class="separator:adc41885e47770d7e9f3adf036855025f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4601978eb9c57defef5519fdb9e1200" id="r_af4601978eb9c57defef5519fdb9e1200"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4601978eb9c57defef5519fdb9e1200">RC522_DEFAULT_I2C_CLOCK_SPEED_HZ</a>&#160;&#160;&#160;(100000)</td></tr>
+<tr class="memdesc:af4601978eb9c57defef5519fdb9e1200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocidad de reloj I2C predeterminada del RC522 en Hz.  <br /></td></tr>
 <tr class="separator:af4601978eb9c57defef5519fdb9e1200"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af57b28472144205534e7d3ead82079d5" id="r_af57b28472144205534e7d3ead82079d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af57b28472144205534e7d3ead82079d5">rc522_resume</a>(<a class="el" href="structrc522.html">rc522</a>)&#160;&#160;&#160;<a class="el" href="#a886b2b922c8bd390c38d643495ea1896">rc522_start</a>(<a class="el" href="structrc522.html">rc522</a>)</td></tr>
-<tr class="memdesc:af57b28472144205534e7d3ead82079d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start to scan tags. If already started, ESP_OK will just be returned.  <br /></td></tr>
+<tr class="memdesc:af57b28472144205534e7d3ead82079d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reanuda el escaneo de etiquetas.  <br /></td></tr>
 <tr class="separator:af57b28472144205534e7d3ead82079d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a8f27ba127519044d9d033889fd89c325" id="r_a8f27ba127519044d9d033889fd89c325"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structrc522.html">rc522</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a></td></tr>
+<tr class="memdesc:a8f27ba127519044d9d033889fd89c325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manejador de la instancia del RC522.  <br /></td></tr>
 <tr class="separator:a8f27ba127519044d9d033889fd89c325"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -142,30 +155,36 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#acf359d27eaaaa6c052fb950573a53f31adb33273dd6d79f9773aa371e7938fae8">RC522_EVENT_NONE</a>
 , <a class="el" href="#acf359d27eaaaa6c052fb950573a53f31a6ace4af60970c6730cf017ba83ac396f">RC522_EVENT_TAG_SCANNED</a>
  }</td></tr>
+<tr class="memdesc:acf359d27eaaaa6c052fb950573a53f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eventos del RC522.  <a href="#acf359d27eaaaa6c052fb950573a53f31">More...</a><br /></td></tr>
 <tr class="separator:acf359d27eaaaa6c052fb950573a53f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a52cc5e178370516be4d7ad6bfabd6106" id="r_a52cc5e178370516be4d7ad6bfabd6106"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52cc5e178370516be4d7ad6bfabd6106">ESP_EVENT_DECLARE_BASE</a> (RC522_EVENTS)</td></tr>
+<tr class="memdesc:a52cc5e178370516be4d7ad6bfabd6106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base de eventos para el controlador RC522.  <br /></td></tr>
 <tr class="separator:a52cc5e178370516be4d7ad6bfabd6106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f313f14f12f5b7d320be2de484708ec" id="r_a0f313f14f12f5b7d320be2de484708ec"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f313f14f12f5b7d320be2de484708ec">rc522_create</a> (<a class="el" href="structrc522__config__t.html">rc522_config_t</a> *<a class="el" href="main_8c.html#a6a462cb2701e12b872e934b17e51cb27">config</a>, <a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a> *out_rc522)</td></tr>
-<tr class="memdesc:a0f313f14f12f5b7d320be2de484708ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create RC522 scanner handle. To start scanning tags call the rc522_start function.  <br /></td></tr>
+<tr class="memdesc:a0f313f14f12f5b7d320be2de484708ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea una instancia del controlador RC522.  <br /></td></tr>
 <tr class="separator:a0f313f14f12f5b7d320be2de484708ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a606e772e26d968afe2554ee0a54c59b5" id="r_a606e772e26d968afe2554ee0a54c59b5"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a606e772e26d968afe2554ee0a54c59b5">rc522_register_events</a> (<a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a> <a class="el" href="structrc522.html">rc522</a>, <a class="el" href="#acf359d27eaaaa6c052fb950573a53f31">rc522_event_t</a> event, esp_event_handler_t event_handler, void *event_handler_arg)</td></tr>
+<tr class="memdesc:a606e772e26d968afe2554ee0a54c59b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registra eventos del RC522.  <br /></td></tr>
 <tr class="separator:a606e772e26d968afe2554ee0a54c59b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2682d9943e56bc8cb9a5e2c931e33f2b" id="r_a2682d9943e56bc8cb9a5e2c931e33f2b"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2682d9943e56bc8cb9a5e2c931e33f2b">rc522_unregister_events</a> (<a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a> <a class="el" href="structrc522.html">rc522</a>, <a class="el" href="#acf359d27eaaaa6c052fb950573a53f31">rc522_event_t</a> event, esp_event_handler_t event_handler)</td></tr>
+<tr class="memdesc:a2682d9943e56bc8cb9a5e2c931e33f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anula el registro de eventos del RC522.  <br /></td></tr>
 <tr class="separator:a2682d9943e56bc8cb9a5e2c931e33f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a886b2b922c8bd390c38d643495ea1896" id="r_a886b2b922c8bd390c38d643495ea1896"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a886b2b922c8bd390c38d643495ea1896">rc522_start</a> (<a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a> <a class="el" href="structrc522.html">rc522</a>)</td></tr>
-<tr class="memdesc:a886b2b922c8bd390c38d643495ea1896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start to scan tags. If already started, ESP_OK will just be returned. Initialization function had to be called before this one.  <br /></td></tr>
+<tr class="memdesc:a886b2b922c8bd390c38d643495ea1896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia el escaneo de etiquetas.  <br /></td></tr>
 <tr class="separator:a886b2b922c8bd390c38d643495ea1896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00834c0e674d13b5787b0d43be6d2e43" id="r_a00834c0e674d13b5787b0d43be6d2e43"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00834c0e674d13b5787b0d43be6d2e43">rc522_pause</a> (<a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a> <a class="el" href="structrc522.html">rc522</a>)</td></tr>
-<tr class="memdesc:a00834c0e674d13b5787b0d43be6d2e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause scan tags. If already paused, ESP_OK will just be returned.  <br /></td></tr>
+<tr class="memdesc:a00834c0e674d13b5787b0d43be6d2e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pausa el escaneo de etiquetas.  <br /></td></tr>
 <tr class="separator:a00834c0e674d13b5787b0d43be6d2e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8547957990e60be6ce11066ce43da551" id="r_a8547957990e60be6ce11066ce43da551"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8547957990e60be6ce11066ce43da551">rc522_destroy</a> (<a class="el" href="#a8f27ba127519044d9d033889fd89c325">rc522_handle_t</a> <a class="el" href="structrc522.html">rc522</a>)</td></tr>
-<tr class="memdesc:a8547957990e60be6ce11066ce43da551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy RC522 and free all resources. Cannot be called from event handler.  <br /></td></tr>
+<tr class="memdesc:a8547957990e60be6ce11066ce43da551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destruye el controlador RC522 y libera todos los recursos.  <br /></td></tr>
 <tr class="separator:a8547957990e60be6ce11066ce43da551"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Encabezado para el controlador RC522 RFID. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af4601978eb9c57defef5519fdb9e1200" name="af4601978eb9c57defef5519fdb9e1200"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af4601978eb9c57defef5519fdb9e1200">&#9670;&#160;</a></span>RC522_DEFAULT_I2C_CLOCK_SPEED_HZ</h2>
 
@@ -177,6 +196,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Velocidad de reloj I2C predeterminada del RC522 en Hz. </p>
 
 </div>
 </div>
@@ -192,6 +213,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Tiempo de espera predeterminado de lectura/escritura I2C del RC522 en milisegundos. </p>
+
 </div>
 </div>
 <a id="ac4dbe3b4bff8eea3ffb8470d68af4a04" name="ac4dbe3b4bff8eea3ffb8470d68af4a04"></a>
@@ -205,6 +228,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Intervalo de escaneo predeterminado del RC522 en milisegundos. </p>
 
 </div>
 </div>
@@ -220,6 +245,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Velocidad de reloj SPI predeterminada del RC522 en Hz. </p>
+
 </div>
 </div>
 <a id="a0ca94dcb36acb08906aaf37c46fbdb5b" name="a0ca94dcb36acb08906aaf37c46fbdb5b"></a>
@@ -234,6 +261,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Prioridad predeterminada de la pila de la tarea del RC522. </p>
+
 </div>
 </div>
 <a id="a5b5d05f7e1ded2b8b2d95e9cdcca7e42" name="a5b5d05f7e1ded2b8b2d95e9cdcca7e42"></a>
@@ -247,6 +276,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Tamaño predeterminado de la pila de la tarea del RC522. </p>
 
 </div>
 </div>
@@ -265,14 +296,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Start to scan tags. If already started, ESP_OK will just be returned. </p>
+<p>Reanuda el escaneo de etiquetas. </p>
+<p>Si ya está en ejecución, simplemente se devuelve ESP_OK.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Handle </td></tr>
+    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Instancia del RC522. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
 
 </div>
 </div>
@@ -289,6 +321,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Manejador de la instancia del RC522. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -303,10 +337,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Eventos del RC522. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="acf359d27eaaaa6c052fb950573a53f31aaa01ea7d8a0aa77f782b452d722824ab" name="acf359d27eaaaa6c052fb950573a53f31aaa01ea7d8a0aa77f782b452d722824ab"></a>RC522_EVENT_ANY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="acf359d27eaaaa6c052fb950573a53f31adb33273dd6d79f9773aa371e7938fae8" name="acf359d27eaaaa6c052fb950573a53f31adb33273dd6d79f9773aa371e7938fae8"></a>RC522_EVENT_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="acf359d27eaaaa6c052fb950573a53f31a6ace4af60970c6730cf017ba83ac396f" name="acf359d27eaaaa6c052fb950573a53f31a6ace4af60970c6730cf017ba83ac396f"></a>RC522_EVENT_TAG_SCANNED&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="acf359d27eaaaa6c052fb950573a53f31aaa01ea7d8a0aa77f782b452d722824ab" name="acf359d27eaaaa6c052fb950573a53f31aaa01ea7d8a0aa77f782b452d722824ab"></a>RC522_EVENT_ANY&#160;</td><td class="fielddoc"><p>Cualquier evento </p>
+</td></tr>
+<tr><td class="fieldname"><a id="acf359d27eaaaa6c052fb950573a53f31adb33273dd6d79f9773aa371e7938fae8" name="acf359d27eaaaa6c052fb950573a53f31adb33273dd6d79f9773aa371e7938fae8"></a>RC522_EVENT_NONE&#160;</td><td class="fielddoc"><p>Ningún evento </p>
+</td></tr>
+<tr><td class="fieldname"><a id="acf359d27eaaaa6c052fb950573a53f31a6ace4af60970c6730cf017ba83ac396f" name="acf359d27eaaaa6c052fb950573a53f31a6ace4af60970c6730cf017ba83ac396f"></a>RC522_EVENT_TAG_SCANNED&#160;</td><td class="fielddoc"><p>Tarjeta escaneada </p>
+</td></tr>
 </table>
 
 </div>
@@ -326,6 +365,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Base de eventos para el controlador RC522. </p>
 
 </div>
 </div>
@@ -348,15 +389,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create RC522 scanner handle. To start scanning tags call the rc522_start function. </p>
+<p>Crea una instancia del controlador RC522. </p>
+<p>Para iniciar el escaneo de etiquetas, llame a la función rc522_start.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">config</td><td>Configuration </td></tr>
-    <tr><td class="paramname">out_rc522</td><td>Pointer to resulting new handle </td></tr>
+    <tr><td class="paramname">config</td><td>Configuración del RC522. </td></tr>
+    <tr><td class="paramname">out_rc522</td><td>Puntero a la nueva instancia creada. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
 
 </div>
 </div>
@@ -375,13 +417,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroy RC522 and free all resources. Cannot be called from event handler. </p>
+<p>Destruye el controlador RC522 y libera todos los recursos. </p>
+<p>No puede llamarse desde un manejador de eventos.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Handle </td></tr>
+    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Instancia del RC522. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
 
 </div>
 </div>
@@ -400,14 +444,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Pause scan tags. If already paused, ESP_OK will just be returned. </p>
+<p>Pausa el escaneo de etiquetas. </p>
+<p>Si ya está pausado, simplemente se devuelve ESP_OK.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Handle </td></tr>
+    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Instancia del RC522. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
 
 </div>
 </div>
@@ -440,6 +485,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Registra eventos del RC522. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Instancia del RC522. </td></tr>
+    <tr><td class="paramname">event</td><td>Evento a registrar. </td></tr>
+    <tr><td class="paramname">event_handler</td><td>Manejador del evento. </td></tr>
+    <tr><td class="paramname">event_handler_arg</td><td>Argumento del manejador del evento. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
+
 </div>
 </div>
 <a id="a886b2b922c8bd390c38d643495ea1896" name="a886b2b922c8bd390c38d643495ea1896"></a>
@@ -457,14 +514,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Start to scan tags. If already started, ESP_OK will just be returned. Initialization function had to be called before this one. </p>
+<p>Inicia el escaneo de etiquetas. </p>
+<p>Si ya está iniciado, simplemente se devuelve ESP_OK.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Handle </td></tr>
+    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Instancia del RC522. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
 
 </div>
 </div>
@@ -491,6 +549,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Anula el registro de eventos del RC522. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structrc522.html">rc522</a></td><td>Instancia del RC522. </td></tr>
+    <tr><td class="paramname">event</td><td>Evento a anular el registro. </td></tr>
+    <tr><td class="paramname">event_handler</td><td>Manejador del evento a anular el registro. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK en caso de éxito. </dd></dl>
 
 </div>
 </div>

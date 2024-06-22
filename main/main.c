@@ -6,11 +6,8 @@
 #include "wifi_credentials.h"
 #include <driver/gpio.h>
 #include <string.h>
-
-
-#define LED_GPIO    2
-#define MQTT_URL                        "mqtt://broker.hivemq.com"
-
+#include "config.h"
+#include <stdio.h>
 
 
 static const char* TAG = "Lector de tarjetas";
@@ -21,10 +18,10 @@ static rc522_handle_t scanner;
 
 rc522_config_t config = {
     .spi.host = VSPI_HOST,
-    .spi.miso_gpio = 25,
-    .spi.mosi_gpio = 23, 
-    .spi.sck_gpio = 19,
-    .spi.sda_gpio = 22,
+    .spi.miso_gpio = RC522_MISO_GPIO,
+    .spi.mosi_gpio = RC522_MOSI_GPIO,
+    .spi.sck_gpio = RC522_SCK_GPIO,
+    .spi.sda_gpio = RC522_SDA_GPIO,
     .spi.device_flags= SPI_DEVICE_HALFDUPLEX
 };
 
@@ -45,7 +42,7 @@ static void rc522_handler(void* arg, esp_event_base_t base, int32_t event_id, vo
                 ESP_LOGI(TAG, "%s\n", buffer);
 
                 // Publicar el valor de la tarjeta al tópico grupob_request
-                mqtt_publish(buffer, "grupob_request", 2, 0);
+                mqtt_publish(buffer, MQTT_TOPIC_PUB, 2, 0);
             }
             break;
     }
@@ -81,27 +78,22 @@ void get_data(const char* data) {
 
 
 
-
-
-
-
 static void mqtt_connected(){
     printf("MQTT conectado, suscribiéndose al tópico 'grupob_request1'.\n");
-    int msg_id = mqtt_subcribe("grupob_request1", 2); // Suscripción al tópico grupob_request1 con QoS 2
+    mqtt_subcribe(MQTT_TOPIC_RES, 2); // Suscripción al tópico grupob_request1 con QoS 2
+    gpio_set_level(LED_GPIO, 1); // enciendo LED cuando se conecte a MQTT
 }
 
 static void callback_wifi_connected(){
     printf("WiFi conectada. Iniciando MQTT...\n");
     mqtt_init(MQTT_URL, mqtt_connected, NULL, get_data);
-    gpio_set_level(LED_GPIO, 1); // enciendo LED cuando se conecte a WIFI
 }
 
 
 static void led_config(){
-    gpio_set_direction(LED_GPIO,GPIO_MODE_OUTPUT);
+    gpio_set_direction(LED_GPIO, GPIO_MODE_OUTPUT);
     gpio_set_level(LED_GPIO,0);
 }
-
 
 
 

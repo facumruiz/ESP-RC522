@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proyecto lector RFID: main/mqtt.c File Reference</title>
+<title>DetectorRFID: main/mqtt.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Proyecto lector RFID<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">DetectorRFID<span id="projectnumber">&#160;0.0.1</span>
    </div>
-   <div id="projectbrief">Lector de tarjetas RFID con conexión a servidor MQTT.</div>
+   <div id="projectbrief">Proyecto de detector RFID utilizando ESP32 y lector RFID RC522.</div>
   </td>
  </tr>
  </tbody>
@@ -103,10 +103,13 @@ Functions</h2></td></tr>
 <tr class="memdesc:ae02586ca63faaa5c589d63014e012b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura e inicia la conexión al servidor MQTT.  <br /></td></tr>
 <tr class="separator:ae02586ca63faaa5c589d63014e012b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6005f07b6ce67129dea806b6f314f00" id="r_ab6005f07b6ce67129dea806b6f314f00"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6005f07b6ce67129dea806b6f314f00">mqtt_publish</a> (const char *msg, const char *topic, int qos, int retain)</td></tr>
+<tr class="memdesc:ab6005f07b6ce67129dea806b6f314f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publica un mensaje en un tópico MQTT específico.  <br /></td></tr>
 <tr class="separator:ab6005f07b6ce67129dea806b6f314f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d134afffb942c0155b519c071b4626" id="r_ab4d134afffb942c0155b519c071b4626"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4d134afffb942c0155b519c071b4626">mqtt_publish_on_queue</a> (const char *msg, const char *topic, int qos, int retain)</td></tr>
+<tr class="memdesc:ab4d134afffb942c0155b519c071b4626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publica un mensaje en un tópico MQTT específico utilizando una cola.  <br /></td></tr>
 <tr class="separator:ab4d134afffb942c0155b519c071b4626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bdeff102ec63e2198c6226440008b82" id="r_a5bdeff102ec63e2198c6226440008b82"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bdeff102ec63e2198c6226440008b82">mqtt_subcribe</a> (char *topic, int qos)</td></tr>
+<tr class="memdesc:a5bdeff102ec63e2198c6226440008b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suscribe el cliente MQTT a un tópico específico.  <br /></td></tr>
 <tr class="separator:a5bdeff102ec63e2198c6226440008b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -140,16 +143,17 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configura e inicia la conexión al servidor MQTT. </p>
+<p>Esta función establece la conexión inicial al servidor MQTT especificado por <code>uri</code>. Se pueden proporcionar callbacks para manejar eventos de conexión, desconexión y recepción de datos.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">uri</td><td>El URL del servidor MQTT. </td></tr>
-    <tr><td class="paramname">conn</td><td>Función que se llama al conectarse al servidor. </td></tr>
-    <tr><td class="paramname">disconn</td><td>Función que se llama al desconectarse del servidor. </td></tr>
-    <tr><td class="paramname">data_received</td><td>Función que se llama al recibir datos desde un canal subscripto. </td></tr>
+    <tr><td class="paramname">uri</td><td>URL del servidor MQTT. </td></tr>
+    <tr><td class="paramname">conn</td><td>Función de callback llamada al conectarse al servidor. </td></tr>
+    <tr><td class="paramname">disconn</td><td>Función de callback llamada al desconectarse del servidor. </td></tr>
+    <tr><td class="paramname">data_received</td><td>Función de callback llamada al recibir datos desde un canal subscripto. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t Retorna ESP_OK si todo salió bien. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK si la operación se realizó correctamente, de lo contrario un código de error. </dd></dl>
 
 </div>
 </div>
@@ -181,16 +185,19 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Publica un mensaje en un tópico MQTT específico. </p>
+<p>Esta función publica el mensaje <code>msg</code> en el tópico <code>topic</code> con el nivel de calidad de servicio (QoS) especificado.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">msg</td><td></td></tr>
-    <tr><td class="paramname">topic</td><td></td></tr>
-    <tr><td class="paramname">qos</td><td></td></tr>
-    <tr><td class="paramname">retain</td><td></td></tr>
+    <tr><td class="paramname">msg</td><td>Mensaje a publicar. </td></tr>
+    <tr><td class="paramname">topic</td><td>Tópico MQTT donde se publicará el mensaje. </td></tr>
+    <tr><td class="paramname">qos</td><td>Nivel de calidad de servicio (QoS) para la publicación. </td></tr>
+    <tr><td class="paramname">retain</td><td>Indicador para retener el mensaje en el broker MQTT. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK si la publicación se realizó correctamente, de lo contrario un código de error. </dd></dl>
 
 </div>
 </div>
@@ -223,6 +230,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Publica un mensaje en un tópico MQTT específico utilizando una cola. </p>
+<p>Esta función publica el mensaje <code>msg</code> en el tópico <code>topic</code> utilizando una cola para manejar la publicación de manera asincrónica.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Mensaje a publicar. </td></tr>
+    <tr><td class="paramname">topic</td><td>Tópico MQTT donde se publicará el mensaje. </td></tr>
+    <tr><td class="paramname">qos</td><td>Nivel de calidad de servicio (QoS) para la publicación. </td></tr>
+    <tr><td class="paramname">retain</td><td>Indicador para retener el mensaje en el broker MQTT. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK si la publicación en la cola se realizó correctamente, de lo contrario un código de error. </dd></dl>
+
 </div>
 </div>
 <a id="a5bdeff102ec63e2198c6226440008b82" name="a5bdeff102ec63e2198c6226440008b82"></a>
@@ -243,6 +263,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Suscribe el cliente MQTT a un tópico específico. </p>
+<p>Esta función suscribe el cliente MQTT al tópico especificado con el nivel de calidad de servicio (QoS) indicado.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">topic</td><td>Tópico MQTT al que se desea suscribir. </td></tr>
+    <tr><td class="paramname">qos</td><td>Nivel de calidad de servicio (QoS) para la suscripción. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK si la suscripción se realizó correctamente, de lo contrario un código de error. </dd></dl>
 
 </div>
 </div>
