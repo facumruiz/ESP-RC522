@@ -4,7 +4,7 @@ En este proyecto tenemos un lector de tarjetas RFID que publica las tarjetas le�
 ## Documentacion
 Este proyecto se documentó utilizando Doxygen, una herramienta para generar documentación automática a partir de comentarios integrados en el código fuente.
 
-[Documentación de Doxygen](https://facumruiz.github.io/ESP-RC522/functions.html)
+[Documentación de Doxygen](https://facumruiz.github.io/ESP-RC522/files.html)
 
 ## Estructura del proyecto
 ```
@@ -98,7 +98,7 @@ Revisar que su placa de desarrollo coincida con el siguiente pinout.
 - **Tarjeta RFID Escaneada:** Utilizando un lector RFID RC522, el sistema escanea tarjetas RFID cercanas. Cuando se detecta una tarjeta, se genera un evento que se maneja para obtener y publicar la información de la tarjeta mediante MQTT.
 - **Datos Recibidos por MQTT:** El sistema se conecta a un broker MQTT utilizando una URL predefinida. Al recibir mensajes desde MQTT, el sistema los procesa para controlar el estado del LED. Por ejemplo, encendiendo o apagando el LED según el mensaje recibido.
 
-Para más detalles sobre la configuración y uso, el archivo generado por Doxygen disponible en [enlace de la documentación](https://facumruiz.github.io/ESP-RC522/functions.html)
+Para más detalles sobre la configuración y uso, el archivo generado por Doxygen disponible en [enlace de la documentación](https://facumruiz.github.io/ESP-RC522/files.html)
 
 
 
