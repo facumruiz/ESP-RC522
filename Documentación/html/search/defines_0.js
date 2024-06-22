@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_5f_5fhas_5finclude_0',['__has_include',['../bootloader_2_c_make_files_23_824_80_2_compiler_id_c_2_c_make_c_compiler_id_8c.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCCompilerId.c'],['../bootloader_2_c_make_files_23_824_80_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCXXCompilerId.cpp'],['../_c_make_files_23_824_80_2_compiler_id_c_2_c_make_c_compiler_id_8c.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCCompilerId.c'],['../_c_make_files_23_824_80_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCXXCompilerId.cpp']]],
-  ['_5fwifi_5fcredentials_5fh_1',['_WIFI_CREDENTIALS_H',['../wifi__credentials_8h.html#a83958f1550597bc9c32a022025ca3e80',1,'wifi_credentials.h']]]
+  ['alloc_5fjmp_5fguard_0',['ALLOC_JMP_GUARD',['../guards_8h.html#a2eec2ec6bd55580961dc08e4af4754df',1,'guards.h']]],
+  ['alloc_5fret_5fguard_1',['ALLOC_RET_GUARD',['../guards_8h.html#a35b4bd9c98118f503a721b952e447361',1,'guards.h']]]
 ];
