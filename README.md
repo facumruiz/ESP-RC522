@@ -1,48 +1,20 @@
 ## Lector RFID con conexión mediante Wi-Fi y protocolo MQTT.
 
 En este proyecto tenemos un lector de tarjetas RFID que publica las tarjetas leídas en un cierto tópico. Un servicio Backend recibe esa publicación, verifica que el código RFID pertenezca a un usuario autorizado y publica una respuesta.
-## Documentacion
-Este proyecto se documentó utilizando Doxygen, una herramienta para generar documentación automática a partir de comentarios integrados en el código fuente.
 
-[Documentación de Doxygen](https://facumruiz.github.io/ESP-RC522/files.html)
+[Documentación](https://facumruiz.github.io/ESP-RC522/files.html)
 
 ## Estructura del proyecto
-```
-ESP-RC522/
-│
-├── Documentacion/
-│
-├── imgs/
-│   ├── circuito.jpg
-│   ├── diagrama.jpg
-│   └── esp32_pinout.jpg
-│
-├── main/
-│   ├── include/
-│   │    ├── base.h/
-│   │    ├── guards.h/
-│   │    ├── mqtt.h/
-│   │    ├── rc522_registers.h/
-│   │    ├── rc522.h/
-│   │    ├── wifi_credentials.h/
-│   │    └── wifi.h/
-│   │ 
-│   ├── main.c
-│   ├── mqtt.c
-│   ├── rc522.c
-│   └── wifi.c/
-│ 
-├── .gitignore
-├── CMakeLists.txt
-└── README.md
-```
+![pinout_esp32](./imgs/estructura.PNG)
+
 ### Observaciones
 - **Librerías en `include/`:** Aquí se encuentran los archivos de encabezado que contienen las definiciones de las funciones y estructuras utilizadas en el proyecto.
+
 ## Configuración
 
 El archivo `config.h` define las siguientes configuraciones:
 
-#### Pines GPIO
+####  Pines GPIO
 
 - **LED interno del ESP**: GPIO 2
 - **Lector RFID RC522**:
@@ -54,12 +26,12 @@ El archivo `config.h` define las siguientes configuraciones:
 #### Configuración MQTT
 
 - **URL del broker MQTT**: `mqtt://broker.hivemq.com`
-- **Temas MQTT**:
+- **Tópicos MQTT**:
   - `grupob_request`: Publicación de información de tarjetas RFID
   - `grupob_request1`: Suscripción a comandos de control
 
 #### Configuración Wi-Fi
-- **Credenciales Wi-Fi:** Almacena tu SSID y contraseña de Wi-Fi en `wifi_credentials.h` dentro de include.
+- **Credenciales Wi-Fi:** Almacena tu contraseña de Wi-Fi en `wifi_credentials.h` dentro de include.
 ```c
 #ifndef _WIFICREDENTIALS_H
 #define _WIFI_CREDENTIALS_H
@@ -75,16 +47,16 @@ La placa utilizada para realizar las pruebas tiene la siguiente distribución de
 [Link a tienda](https://tienda.starware.com.ar/producto/placa-desarrollo-espressif-esp32-ch9102x-dual-core-wifi-bluetooth/)
 
 
-Revisar que su placa de desarrollo coincida con el siguiente pinout.
 
 
 
-### Imagen del circuito montado
 
-![circuito](./imgs/circuito.jpg)
+### Imagen de conexiones
+
+![circuito](./imgs/circuito_proto.png)
 
 
-### Funcionamiento.
+### Funcionamiento (demo primer prototipo).
 ![funcionamiento](./imgs/funcionamiento.gif)
 
 
@@ -94,9 +66,17 @@ Revisar que su placa de desarrollo coincida con el siguiente pinout.
 
 
 
-### Manejo de Eventos
-- **Tarjeta RFID Escaneada:** Utilizando un lector RFID RC522, el sistema escanea tarjetas RFID cercanas. Cuando se detecta una tarjeta, se genera un evento que se maneja para obtener y publicar la información de la tarjeta mediante MQTT.
-- **Datos Recibidos por MQTT:** El sistema se conecta a un broker MQTT utilizando una URL predefinida. Al recibir mensajes desde MQTT, el sistema los procesa para controlar el estado del LED. Por ejemplo, encendiendo o apagando el LED según el mensaje recibido.
+1. **ESP32 (Microcontrolador):** 
+
+    - **Conexión con el servidor:** En este caso se conecta con el servidor de tipo broker MQTT llamado HiveMQ. El mismo se usa para suscripción y publicación a tópicos. 
+    - **Publicación código de tarjeta RFID** cuando el usuario acerca una tarjeta o llavero RFID publica en el tópico `grupob_request` el código RFID del objeto escaneado.
+    - **Estado autenticación** el sistema se suscribe al tópico `grupob_request1` si el backend autentico de manera exitosa al usuario, el tópico devuelve un 1 de lo contrario va a devolver un 0. El sistema procesa y extrae esta respuesta publicada en el tópico para controlar el estado de los GPIOs
+  
+2. **Backend (Servidor):** [Repositorio de API](https://github.com/facumruiz/rfidhub)
+    - **Conexión con el servidor** El servidor establece una conexión con el ESP32 por medio del broker MQTT. Esto permite que ambos dispositivos se comuniquen entre sí.
+    - **Extracción numero RFID** el sistema se suscribe al `grupob_request` en el cual se hace una publicación del numero RFID escaneado.  
+    - **Publicación del estado de autenticación** se publica en el tópico `grupob_request1` el estado de autenticación.
+  
 
 Para más detalles sobre la configuración y uso, el archivo generado por Doxygen disponible en [enlace de la documentación](https://facumruiz.github.io/ESP-RC522/files.html)
 
