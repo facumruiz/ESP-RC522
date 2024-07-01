@@ -16,6 +16,8 @@
  * Para ESP8266, puede estar en GPIO 1 o GPIO 2.
  */
 #define LED_GPIO    2
+#define LED_GPIO4    5
+
 #define RC522_MISO_GPIO  25
 #define RC522_MOSI_GPIO  23
 #define RC522_SCK_GPIO   19
